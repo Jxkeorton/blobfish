@@ -34,18 +34,7 @@ export default async function CategoryPage({ params }: PageProps) {
   return (
     <div className="flex min-h-screen items-center justify-center font-sans bg-background">
       <main className="flex min-h-screen w-full max-w-screen-xl flex-col py-5 px-16 bg-background">
-        <Header />
-        
-        {/* Back Link */}
-        <Link 
-          href="/"
-          className="inline-flex items-center gap-2 text-gray-400 hover:text-orange-500 transition-colors mt-8"
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-          Back to Categories
-        </Link>
+        <Header showBackLink />
         
         {/* Category Videos Section */}
         <section className="w-full mt-8">
