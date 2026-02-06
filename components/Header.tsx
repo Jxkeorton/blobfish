@@ -1,11 +1,13 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-interface HeaderProps {
-  showBackLink?: boolean;
-}
+export const Header = () => {
+  const pathname = usePathname();
+  const showBackLink = pathname !== "/";
 
-export const Header = ({ showBackLink = false }: HeaderProps) => {
   return (
     <header className="top-0 left-0 z-50 bg-background shadow-sm">
       <div className="mx-auto px-4 py-2 flex items-center justify-between">

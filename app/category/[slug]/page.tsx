@@ -1,4 +1,3 @@
-import { Header } from "@/components/Header";
 import { VideoCard } from "@/components/VideoCard";
 import videoUrls from "@/data/videoUrls.json";
 import { notFound } from "next/navigation";
@@ -33,12 +32,9 @@ export default async function CategoryPage({ params }: PageProps) {
   const categoryTitle = formatTitle(slug);
 
   return (
-    <div className="flex min-h-screen items-center justify-center font-custom bg-background">
-      <main className="flex min-h-screen w-full max-w-screen-xl flex-col py-5 px-16 bg-background">
-        <Header showBackLink />
-        
-        {/* Category Videos Section */}
-        <section className="w-full mt-8">
+    <>        
+      {/* Category Videos Section */}
+      <section className="w-full mt-8">
           <h2 className="text-3xl text-foreground mb-2">{categoryTitle}</h2>
           <p className="text-gray-400 mb-8">{videos.length} videos</p>
           
@@ -52,8 +48,7 @@ export default async function CategoryPage({ params }: PageProps) {
             ))}
           </div>
         </section>
-      </main>
-    </div>
+    </>
   );
 }
 
