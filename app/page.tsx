@@ -21,13 +21,13 @@ export default function Home() {
   const categories = Object.entries(videoUrls) as [string, Record<string, { url: string }>][];
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-screen-xl flex-col py-32 px-16 bg-white dark:bg-black">
+    <div className="flex min-h-screen items-center justify-center font-sans bg-background">
+      <main className="flex min-h-screen w-full max-w-screen-xl flex-col py-5 px-16 bg-background">
         <Header />
         
         {/* Categories Section */}
-        <section className="w-full mt-12">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Video Categories</h2>
+        <section className="w-full mt-5">
+          <h2 className="text-2xl font-bold text-foreground mb-6">Video Categories</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {categories.map(([slug, videos]) => {
               const videoEntries = Object.values(videos);

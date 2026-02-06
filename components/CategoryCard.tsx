@@ -29,16 +29,16 @@ export const CategoryCard = ({ slug, title, thumbnailUrl, videoCount }: Category
         
         {/* Folder Icon */}
         <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-sm rounded-lg px-3 py-1.5 flex items-center gap-2">
-          <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
           </svg>
-          <span className="text-white text-sm font-medium">{videoCount} videos</span>
+          <span className="text-foreground text-sm font-medium">{videoCount} videos</span>
         </div>
       </div>
       
       {/* Title */}
       <div className="absolute bottom-0 left-0 right-0 p-5">
-        <h3 className="text-xl font-bold text-white">{title}</h3>
+        <h3 className="text-xl font-bold text-foreground">{title}</h3>
       </div>
       
       {/* Hover Border Effect */}

@@ -32,14 +32,14 @@ export default async function CategoryPage({ params }: PageProps) {
   const categoryTitle = formatTitle(slug);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-screen-xl flex-col py-32 px-16 bg-white dark:bg-black">
+    <div className="flex min-h-screen items-center justify-center font-sans bg-background">
+      <main className="flex min-h-screen w-full max-w-screen-xl flex-col py-5 px-16 bg-background">
         <Header />
         
         {/* Back Link */}
         <Link 
           href="/"
-          className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-500 transition-colors mt-8"
+          className="inline-flex items-center gap-2 text-gray-400 hover:text-orange-500 transition-colors mt-8"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -49,8 +49,8 @@ export default async function CategoryPage({ params }: PageProps) {
         
         {/* Category Videos Section */}
         <section className="w-full mt-8">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{categoryTitle}</h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-8">{videos.length} videos</p>
+          <h2 className="text-3xl font-bold text-foreground mb-2">{categoryTitle}</h2>
+          <p className="text-gray-400 mb-8">{videos.length} videos</p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {videos.map(([key, video]) => (
