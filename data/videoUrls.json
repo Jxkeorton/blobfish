@@ -1,5 +1,5 @@
 {
-    "vibesAreHigh": {
+    "YoutubeSeries|VibesAreHigh": {
         "ep1": {
             "url": "https://www.youtube.com/watch?v=uj47WD9_LOE"
         },
@@ -10,7 +10,7 @@
             "url": "https://www.youtube.com/watch?v=mCWmlHSt-8g"
         }
     },
-    "multiCamTVShow": {
+    "Youtube|TvStyle": {
         "trackBattleKTM": {
             "url": "https://www.youtube.com/watch?v=kvKMhvuVMY8&t=1s"
         },
@@ -18,7 +18,7 @@
             "url": "https://www.youtube.com/watch?v=WQbyEJcJTTo"
         }
     },
-    "teamLaunches": {
+    "raceTeamLaunches": {
         "2026Rally": {
             "url": "https://www.youtube.com/watch?v=X-u83I46vig"
         },

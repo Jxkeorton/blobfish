@@ -1,12 +1,12 @@
 import { Header } from "@/components/Header";
 import { VideoCard } from "@/components/VideoCard";
 import videoUrls from "@/data/videoUrls.json";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 // Helper to format camelCase to Title Case
 const formatTitle = (key: string) => {
   return key
+    .replace(/\|/g, ' | ')
     .replace(/([A-Z])/g, ' $1')
     .replace(/^./, str => str.toUpperCase())
     .trim();
@@ -32,13 +32,13 @@ export default async function CategoryPage({ params }: PageProps) {
   const categoryTitle = formatTitle(slug);
 
   return (
-    <div className="flex min-h-screen items-center justify-center font-sans bg-background">
+    <div className="flex min-h-screen items-center justify-center font-custom bg-background">
       <main className="flex min-h-screen w-full max-w-screen-xl flex-col py-5 px-16 bg-background">
         <Header showBackLink />
         
         {/* Category Videos Section */}
         <section className="w-full mt-8">
-          <h2 className="text-3xl font-bold text-foreground mb-2">{categoryTitle}</h2>
+          <h2 className="text-3xl text-foreground mb-2">{categoryTitle}</h2>
           <p className="text-gray-400 mb-8">{videos.length} videos</p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

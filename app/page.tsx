@@ -5,6 +5,7 @@ import videoUrls from "@/data/videoUrls.json";
 // Helper to format camelCase to Title Case
 export const formatTitle = (key: string) => {
   return key
+    .replace(/\|/g, ' | ')
     .replace(/([A-Z])/g, ' $1')
     .replace(/^./, str => str.toUpperCase())
     .trim();
@@ -21,13 +22,13 @@ export default function Home() {
   const categories = Object.entries(videoUrls) as [string, Record<string, { url: string }>][];
 
   return (
-    <div className="flex min-h-screen items-center justify-center font-sans bg-background">
+    <div className="flex min-h-screen items-center justify-center font-custom bg-background">
       <main className="flex min-h-screen w-full max-w-screen-xl flex-col py-5 px-16 bg-background">
         <Header />
         
         {/* Categories Section */}
         <section className="w-full mt-5">
-          <h2 className="text-2xl font-bold text-foreground mb-6">Video Categories</h2>
+          <h2 className="text-2xl text-foreground mb-6">Video Categories</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {categories.map(([slug, videos]) => {
               const videoEntries = Object.values(videos);

@@ -47,8 +47,8 @@ export const VideoCard = ({ url, title }: VideoCardProps) => {
       
       {/* Title Overlay */}
       {title && (
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-4 pt-8">
-          <h3 className="text-lg font-semibold text-foreground truncate">{title}</h3>
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-4 pt-8 font-system-sans font-bold">
+          <h3 className="text-lg text-foreground truncate">{title}</h3>
         </div>
       )}
       

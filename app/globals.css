@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'blobFont';
+  src: url('../fonts/Victory-Striker-Sans-Demo.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --background: #141414;
   --foreground: #F9F9F9;
@@ -11,9 +19,18 @@
   --color-text-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-custom: 'blobFont', sans-serif;
 }
+
+
+
 
 body {
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-custom);
+}
+
+.font-system-sans,
+.font-system-sans * {
+  font-family: Arial, Helvetica, sans-serif !important;
 }
