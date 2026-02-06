@@ -5,9 +5,10 @@ import videoUrls from "@/data/videoUrls.json";
 // Helper to format camelCase to Title Case
 export const formatTitle = (key: string) => {
   return key
-    .replace(/\|/g, ' | ')
+    .replace(/-/g, ' | ')
     .replace(/([A-Z])/g, ' $1')
     .replace(/^./, str => str.toUpperCase())
+    .replace(/\s+/g, ' ')
     .trim();
 };
 

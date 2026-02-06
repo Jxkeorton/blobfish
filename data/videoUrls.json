@@ -1,5 +1,5 @@
 {
-    "YoutubeSeries|VibesAreHigh": {
+    "YoutubeSeries-VibesAreHigh": {
         "ep1": {
             "url": "https://www.youtube.com/watch?v=uj47WD9_LOE"
         },
@@ -10,12 +10,29 @@
             "url": "https://www.youtube.com/watch?v=mCWmlHSt-8g"
         }
     },
-    "Youtube|TvStyle": {
-        "trackBattleKTM": {
-            "url": "https://www.youtube.com/watch?v=kvKMhvuVMY8&t=1s"
+    "videoProjects": {
+        "nightAtTheMuseum": {
+            "url": "https://www.youtube.com/watch?v=ELKK0Qoi2dI&t=25s"
         },
-        "stockVsRaceTommySearle": {
-            "url": "https://www.youtube.com/watch?v=WQbyEJcJTTo"
+        "triumphTeaser": {
+            "url": "https://www.youtube.com/watch?v=V7ha_1Vxkj0"
+        },
+        "billyBoltHomecoming": {
+            "url": "https://www.youtube.com/watch?v=IPuFtXkOVV0&t=83s"
+        },
+        "gasgasDirtEpisode12": {
+            "url": "https://www.youtube.com/watch?v=ORETKYLnOX4&t=12s"
+        }
+    },
+    "seasonDocumentaries": {
+        "billyBoltUndefeated2": {
+            "url": "https://www.youtube.com/watch?v=Aa9UuSP2JSc"
+        },
+        "billyBoltUndefeated1": {
+            "url": "https://www.youtube.com/watch?v=GzLVD4wnSrE"
+        },
+        "manuelLettenbichlerPerfectSeason": {
+            "url": "https://www.youtube.com/watch?v=KgWVY7kQBb8"
         }
     },
     "raceTeamLaunches": {
@@ -46,29 +63,12 @@
             "url": "https://www.youtube.com/watch?v=PxrzS0I4lFI&t=1s"
         }
     },
-    "seasonDocumentaries": {
-        "billyBoltUndefeated2": {
-            "url": "https://www.youtube.com/watch?v=Aa9UuSP2JSc"
+    "Youtube-TvStyle": {
+        "trackBattleKTM": {
+            "url": "https://www.youtube.com/watch?v=kvKMhvuVMY8&t=1s"
         },
-        "billyBoltUndefeated1": {
-            "url": "https://www.youtube.com/watch?v=GzLVD4wnSrE"
-        },
-        "manuelLettenbichlerPerfectSeason": {
-            "url": "https://www.youtube.com/watch?v=KgWVY7kQBb8"
-        }
-    },
-    "videoProjects": {
-        "nightAtTheMuseum": {
-            "url": "https://www.youtube.com/watch?v=ELKK0Qoi2dI&t=25s"
-        },
-        "triumphTeaser": {
-            "url": "https://www.youtube.com/watch?v=V7ha_1Vxkj0"
-        },
-        "billyBoltHomecoming": {
-            "url": "https://www.youtube.com/watch?v=IPuFtXkOVV0&t=83s"
-        },
-        "gasgasDirtEpisode12": {
-            "url": "https://www.youtube.com/watch?v=ORETKYLnOX4&t=12s"
+        "stockVsRaceTommySearle": {
+            "url": "https://www.youtube.com/watch?v=WQbyEJcJTTo"
         }
     }
 }
