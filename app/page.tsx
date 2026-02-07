@@ -1,9 +1,43 @@
 import { CategoryCard } from "@/components/CategoryCard";
-import videoUrls from "@/data/videoUrls.json";
+import fs from 'fs';
+import path from 'path';
 
-// Helper to format camelCase to Title Case
-export const formatTitle = (key: string) => {
-  return key
+interface VideoEntry {
+  category: string;
+  title: string;
+  url: string;
+}
+
+// Parse CSV file
+function parseCSV(csvContent: string): VideoEntry[] {
+  const lines = csvContent.trim().split('\n');
+  
+  return lines.slice(1).map(line => {
+    const values = line.trim().split(',');
+    return {
+      category: values[0],
+      title: values[1],
+      url: values[2],
+    };
+  });
+}
+
+// Group videos by category
+function groupByCategory(videos: VideoEntry[]): Map<string, VideoEntry[]> {
+  const grouped = new Map<string, VideoEntry[]>();
+  
+  for (const video of videos) {
+    const existing = grouped.get(video.category) || [];
+    existing.push(video);
+    grouped.set(video.category, existing);
+  }
+  
+  return grouped;
+}
+
+// Format category slug to display title
+const formatCategoryTitle = (slug: string) => {
+  return slug
     .replace(/-/g, ' | ')
     .replace(/([A-Z])/g, ' $1')
     .replace(/^./, str => str.toUpperCase())
@@ -19,7 +53,10 @@ const getYouTubeId = (url: string): string | null => {
 };
 
 export default function Home() {
-  const categories = Object.entries(videoUrls) as [string, Record<string, { url: string }>][];
+  const csvPath = path.join(process.cwd(), 'data', 'videoUrls.csv');
+  const csvContent = fs.readFileSync(csvPath, 'utf-8');
+  const videos = parseCSV(csvContent);
+  const categoriesMap = groupByCategory(videos);
 
   return (
     <>      
@@ -27,9 +64,8 @@ export default function Home() {
       <section className="w-full mt-5">
           <h2 className="text-2xl text-foreground mb-6">Video Categories</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {categories.map(([slug, videos]) => {
-              const videoEntries = Object.values(videos);
-              const firstVideoUrl = videoEntries[0]?.url || '';
+            {Array.from(categoriesMap.entries()).map(([slug, categoryVideos]) => {
+              const firstVideoUrl = categoryVideos[0]?.url || '';
               const videoId = getYouTubeId(firstVideoUrl);
               const thumbnailUrl = videoId 
                 ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
@@ -39,9 +75,9 @@ export default function Home() {
                 <CategoryCard 
                   key={slug}
                   slug={slug}
-                  title={formatTitle(slug)}
+                  title={formatCategoryTitle(slug)}
                   thumbnailUrl={thumbnailUrl}
-                  videoCount={videoEntries.length}
+                  videoCount={categoryVideos.length}
                 />
               );
             })}

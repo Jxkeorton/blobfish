@@ -1,10 +1,38 @@
 import { VideoCard } from "@/components/VideoCard";
-import videoUrls from "@/data/videoUrls.json";
 import { notFound } from "next/navigation";
+import fs from 'fs';
+import path from 'path';
 
-// Helper to format camelCase to Title Case
-const formatTitle = (key: string) => {
-  return key
+interface VideoEntry {
+  category: string;
+  title: string;
+  url: string;
+}
+
+// Parse CSV file
+function parseCSV(csvContent: string): VideoEntry[] {
+  const lines = csvContent.trim().split('\n');
+  
+  return lines.slice(1).map(line => {
+    const values = line.trim().split(',');
+    return {
+      category: values[0],
+      title: values[1],
+      url: values[2],
+    };
+  });
+}
+
+// Get all videos from CSV
+function getVideos(): VideoEntry[] {
+  const csvPath = path.join(process.cwd(), 'data', 'videoUrls.csv');
+  const csvContent = fs.readFileSync(csvPath, 'utf-8');
+  return parseCSV(csvContent);
+}
+
+// Format category slug to display title
+const formatCategoryTitle = (slug: string) => {
+  return slug
     .replace(/-/g, ' | ')
     .replace(/([A-Z])/g, ' $1')
     .replace(/^./, str => str.toUpperCase())
@@ -12,38 +40,37 @@ const formatTitle = (key: string) => {
     .trim();
 };
 
-type VideoUrlsType = typeof videoUrls;
-type CategoryKey = keyof VideoUrlsType;
-
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
 export default async function CategoryPage({ params }: PageProps) {
   const { slug } = await params;
+  const allVideos = getVideos();
+  
+  // Filter videos for this category
+  const categoryVideos = allVideos.filter(video => video.category === slug);
   
   // Check if category exists
-  if (!(slug in videoUrls)) {
+  if (categoryVideos.length === 0) {
     notFound();
   }
 
-  const categoryKey = slug as CategoryKey;
-  const videos = Object.entries(videoUrls[categoryKey]);
-  const categoryTitle = formatTitle(slug);
+  const categoryTitle = formatCategoryTitle(slug);
 
   return (
     <>        
       {/* Category Videos Section */}
       <section className="w-full mt-8">
           <h2 className="text-3xl text-foreground mb-2">{categoryTitle}</h2>
-          <p className="text-gray-400 mb-8">{videos.length} videos</p>
+          <p className="text-gray-400 mb-8">{categoryVideos.length} videos</p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {videos.map(([key, video]) => (
+            {categoryVideos.map((video, index) => (
               <VideoCard 
-                key={key} 
+                key={index} 
                 url={video.url} 
-                title={formatTitle(key)} 
+                title={video.title} 
               />
             ))}
           </div>
@@ -54,7 +81,10 @@ export default async function CategoryPage({ params }: PageProps) {
 
 // Generate static params for all categories
 export function generateStaticParams() {
-  return Object.keys(videoUrls).map((slug) => ({
+  const allVideos = getVideos();
+  const categories = [...new Set(allVideos.map(v => v.category))];
+  
+  return categories.map((slug) => ({
     slug,
   }));
 }
