@@ -30,39 +30,28 @@ function getVideos(): VideoEntry[] {
   return parseCSV(csvContent);
 }
 
-// Format category slug to display title
-const formatCategoryTitle = (slug: string) => {
-  return slug
-    .replace(/-/g, ' | ')
-    .replace(/([A-Z])/g, ' $1')
-    .replace(/^./, str => str.toUpperCase())
-    .replace(/\s+/g, ' ')
-    .trim();
-};
-
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
 export default async function CategoryPage({ params }: PageProps) {
   const { slug } = await params;
+  const categoryName = decodeURIComponent(slug);
   const allVideos = getVideos();
   
   // Filter videos for this category
-  const categoryVideos = allVideos.filter(video => video.category === slug);
+  const categoryVideos = allVideos.filter(video => video.category === categoryName);
   
   // Check if category exists
   if (categoryVideos.length === 0) {
     notFound();
   }
 
-  const categoryTitle = formatCategoryTitle(slug);
-
   return (
     <>        
       {/* Category Videos Section */}
       <section className="w-full mt-8">
-          <h2 className="text-3xl text-foreground mb-2">{categoryTitle}</h2>
+          <h2 className="text-3xl text-foreground mb-2">{categoryName}</h2>
           <p className="text-gray-400 mb-8">{categoryVideos.length} videos</p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -84,7 +73,7 @@ export function generateStaticParams() {
   const allVideos = getVideos();
   const categories = [...new Set(allVideos.map(v => v.category))];
   
-  return categories.map((slug) => ({
-    slug,
+  return categories.map((category) => ({
+    slug: encodeURIComponent(category),
   }));
 }

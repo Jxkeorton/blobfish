@@ -35,16 +35,6 @@ function groupByCategory(videos: VideoEntry[]): Map<string, VideoEntry[]> {
   return grouped;
 }
 
-// Format category slug to display title
-const formatCategoryTitle = (slug: string) => {
-  return slug
-    .replace(/-/g, ' | ')
-    .replace(/([A-Z])/g, ' $1')
-    .replace(/^./, str => str.toUpperCase())
-    .replace(/\s+/g, ' ')
-    .trim();
-};
-
 // Extract YouTube video ID from URL
 const getYouTubeId = (url: string): string | null => {
   const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
@@ -64,7 +54,7 @@ export default function Home() {
       <section className="w-full mt-5">
           <h2 className="text-2xl text-foreground mb-6">Video Categories</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {Array.from(categoriesMap.entries()).map(([slug, categoryVideos]) => {
+            {Array.from(categoriesMap.entries()).map(([category, categoryVideos]) => {
               const firstVideoUrl = categoryVideos[0]?.url || '';
               const videoId = getYouTubeId(firstVideoUrl);
               const thumbnailUrl = videoId 
@@ -73,9 +63,9 @@ export default function Home() {
               
               return (
                 <CategoryCard 
-                  key={slug}
-                  slug={slug}
-                  title={formatCategoryTitle(slug)}
+                  key={category}
+                  slug={encodeURIComponent(category)}
+                  title={category}
                   thumbnailUrl={thumbnailUrl}
                   videoCount={categoryVideos.length}
                 />
