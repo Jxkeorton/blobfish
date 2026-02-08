@@ -30,22 +30,33 @@ function getVideos(): VideoEntry[] {
   return parseCSV(csvContent);
 }
 
+// Convert category name to slug
+function categoryToSlug(category: string): string {
+  return category.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+}
+
+// Find category by slug
+function findCategoryBySlug(slug: string): string | null {
+  const allVideos = getVideos();
+  const categories = [...new Set(allVideos.map(v => v.category))];
+  
+  return categories.find(cat => categoryToSlug(cat) === slug) || null;
+}
+
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
 export default async function CategoryPage({ params }: PageProps) {
   const { slug } = await params;
-  const categoryName = decodeURIComponent(slug);
-  const allVideos = getVideos();
+  const categoryName = findCategoryBySlug(slug);
   
-  // Filter videos for this category
-  const categoryVideos = allVideos.filter(video => video.category === categoryName);
-  
-  // Check if category exists
-  if (categoryVideos.length === 0) {
+  if (!categoryName) {
     notFound();
   }
+  
+  const allVideos = getVideos();
+  const categoryVideos = allVideos.filter(video => video.category === categoryName);
 
   return (
     <>        
@@ -74,6 +85,6 @@ export function generateStaticParams() {
   const categories = [...new Set(allVideos.map(v => v.category))];
   
   return categories.map((category) => ({
-    slug: encodeURIComponent(category),
+    slug: categoryToSlug(category),
   }));
 }

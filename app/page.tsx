@@ -35,6 +35,11 @@ function groupByCategory(videos: VideoEntry[]): Map<string, VideoEntry[]> {
   return grouped;
 }
 
+// Convert category name to slug
+function categoryToSlug(category: string): string {
+  return category.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+}
+
 // Extract YouTube video ID from URL
 const getYouTubeId = (url: string): string | null => {
   const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
@@ -64,7 +69,7 @@ export default function Home() {
               return (
                 <CategoryCard 
                   key={category}
-                  slug={encodeURIComponent(category)}
+                  slug={categoryToSlug(category)}
                   title={category}
                   thumbnailUrl={thumbnailUrl}
                   videoCount={categoryVideos.length}
